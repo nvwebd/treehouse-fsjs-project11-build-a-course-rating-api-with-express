@@ -4,15 +4,23 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js localhost 5000"
+    "start": "nodemon ./src/index.js localhost 5000",
+    "unix:mongo:seed": "mongoimport --db course-api --collection courses --file seed-data/courses.json --type=json --jsonArray --upsert && mongoimport --db course-api --collection reviews --file seed-data/reviews.json --type=json --jsonArray --upsert && mongoimport --db course-api --collection users --file seed-data/users.json --type=json --jsonArray --upsert",
+    "unix:full": "concurrently \"mongod\" \"nodemon ./src/index.js localhost 5000\""
   },
-  "author": "",
+  "author": "Nejc Vukovic - nvwebd.com",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "prettier": "^1.16.4"
   },
   "dependencies": {
+    "basic-auth": "^2.0.1",
+    "bcrypt": "^3.0.4",
+    "concurrently": "^4.1.0",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.4.15",
     "morgan": "^1.9.0"
   }
 }
