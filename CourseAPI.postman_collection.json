@@ -106,7 +106,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"fullName\": \"Joe Smith\",\n    \"emailAddress\": \"joe@smith.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}"
+					"raw": "{\n    \"fullName\": \"Joe Smith\",\n    \"emailAddress\": \"joe@smith.com\",\n    \"password\": \"$2b$10$KK4ijcXt0gKY4o1r8yEmFuu.kDZ3IdHEjPIgJBQVw/oTuleKNwv9m\",\n    \"confirmPassword\": \"$2b$10$KK4ijcXt0gKY4o1r8yEmFuu.kDZ3IdHEjPIgJBQVw/oTuleKNwv9m\"\n}"
 				},
 				"description": ""
 			},
