@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const User = require('./../db/models/User');
 const authenticateUserMiddleware = require('./../middlewares/authenticateUserMiddleware');
+const errorFormatter = require('./../utils/errorFormatter');
 
 router
   .route('/')
   .get(authenticateUserMiddleware, (req, res) => {
-    console.log('req.currentAuthUser: ', req.currentAuthUser);
     res.json(req.currentAuthUser);
   })
   .post((req, res, next) => {
@@ -20,9 +20,8 @@ router
           .set('Location', '/')
           .end();
       })
-      .catch(err => {
-        err.status = 400;
-        next(err);
+      .catch(error => {
+        next(errorFormatter(error));
       });
   });
 
