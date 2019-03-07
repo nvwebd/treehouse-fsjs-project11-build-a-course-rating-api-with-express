@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon ./src/index.js localhost 5000",
     "unix:mongo:seed": "mongoimport --db course-api --collection courses --file seed-data/courses.json --type=json --jsonArray --upsert && mongoimport --db course-api --collection reviews --file seed-data/reviews.json --type=json --jsonArray --upsert && mongoimport --db course-api --collection users --file seed-data/users.json --type=json --jsonArray --upsert",
-    "unix:full": "concurrently \"mongod\" \"nodemon ./src/index.js localhost 5000\""
+    "win:mongo:seed": "mongoimport --db course-api --collection courses --file seed-data\\courses.json --type=json --jsonArray --upsert && mongoimport --db course-api --collection reviews --file seed-data\\reviews.json --type=json --jsonArray --upsert && mongoimport --db course-api --collection users --file seed-data\\users.json --type=json --jsonArray --upsert",
+    "unix:full": "concurrently \"mongod --dbpath ./mongodb/db\" \"nodemon ./src/index.js localhost 5000\"",
+    "win:full": "concurrently \"mongod --dbpath .\\mongodb\\db\" \"nodemon ./src/index.js localhost 5000\""
   },
   "author": "Nejc Vukovic - nvwebd.com",
   "license": "ISC",
