@@ -23,6 +23,9 @@ require('./db/models/Review');
 require('./db/models/Course');
 require('./db/models/User');
 
+/**
+ * Setting up the mongo connection with mongoose - return the connection status
+ */
 mongoose
   .connect(mongoUrl, {
     useNewUrlParser: true,
@@ -47,6 +50,9 @@ app.use(morgan('dev'));
 //  parses incoming requests with JSON payloads - former body-parser package
 app.use(express.json());
 
+/**
+ * use session
+ */
 app.use(
   session({
     secret: 'something secret',

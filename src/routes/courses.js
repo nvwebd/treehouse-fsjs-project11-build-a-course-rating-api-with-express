@@ -9,13 +9,22 @@ const errorFormatter = require('./../utils/errorFormatter');
 router
   .route('/')
   .get((req, res) => {
+    /**
+     * get all courses - return only the _id and the title of the course
+     */
     Course.find({}, '_id title')
       .then(course => res.json(course))
       .catch(error => next(errorFormatter(error)));
   })
   .post(authenticateUserMiddleware, (req, res, next) => {
+    /**
+     * prepare a new Course model
+     */
     const newCourse = new Course(req.body);
 
+    /**
+     * save the user to the DB
+     */
     newCourse
       .save()
       .then(() => {
@@ -30,6 +39,9 @@ router
 router
   .route('/:id')
   .get((req, res, next) => {
+    /**
+     * find a course by ID and populate user data for the user and reviews users
+     */
     Course.findById(req.params.id)
       .exec()
       .then(course => {
@@ -47,6 +59,9 @@ router
           },
         ];
 
+        /**
+         * populate the paths with the model data
+         */
         Course.populate(course, populationOptions)
           .then(populatedCourse => res.json(populatedCourse))
           .catch(error => next(errorFormatter(error)));
@@ -54,7 +69,9 @@ router
       .catch(error => next(errorFormatter(error)));
   })
   .put(authenticateUserMiddleware, (req, res, next) => {
-    // const updateCourseData = req.bod
+    /**
+     * find the course where we added the review to and update the reference to the review id
+     */
     Course.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
       .then(() => res.status(204).send())
       .catch(error => next(errorFormatter(error)));
@@ -68,12 +85,14 @@ router
     (req, res, next) => {
       const course = req.course;
 
+      /**
+       * create the review update the course and redirect to /
+       */
       Review.create(req.body)
         .then(review => {
           course
             .update({ $push: { reviews: review._id } })
             .then(() => {
-              console.log('updated the course with the review!');
               res.location('/');
               res.status(201).send();
             })

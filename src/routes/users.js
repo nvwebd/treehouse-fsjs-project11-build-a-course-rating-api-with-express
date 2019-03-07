@@ -7,11 +7,17 @@ const errorFormatter = require('./../utils/errorFormatter');
 router
   .route('/')
   .get(authenticateUserMiddleware, (req, res) => {
+    /**
+     * return the currently authenticated user
+     */
     res.json(req.currentAuthUser);
   })
   .post((req, res, next) => {
     const newUser = new User(req.body);
 
+    /**
+     * add new user
+     */
     newUser
       .save()
       .then(() => {
@@ -20,9 +26,7 @@ router
           .set('Location', '/')
           .end();
       })
-      .catch(error => {
-        next(errorFormatter(error));
-      });
+      .catch(error => next(errorFormatter(error)));
   });
 
 module.exports = router;

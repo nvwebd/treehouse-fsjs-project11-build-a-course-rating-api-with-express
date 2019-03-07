@@ -31,6 +31,9 @@ const UserSchema = new Schema({
   },
 });
 
+/**
+ * pre 'save' hook to hash the imput password
+ */
 UserSchema.pre('save', function(next) {
   const user = this;
   bcrypt.hash(user.password, 10, (err, hash) => {
@@ -43,6 +46,12 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+/**
+ * authentication static model function to check if the Auth data coresponds to a user in the DB
+ * @param email - string
+ * @param password - string
+ * @param cb - callback function
+ */
 UserSchema.statics.auth = function(email, password, cb) {
   User.findOne({ emailAddress: email }, function(error, user) {
     if (error) {
@@ -52,6 +61,9 @@ UserSchema.statics.auth = function(email, password, cb) {
       error.status = 401;
       return cb(error);
     }
+    /**
+     * compare the incoming password with the saved DB password
+     */
     bcrypt.compare(password, user.password, (error, result) => {
       if (result) {
         return cb(null, user);
