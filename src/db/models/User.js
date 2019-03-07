@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 
 // Set up custom email validation
 function validator(emailValue) {
-  return /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(emailValue);
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    emailValue
+  );
 }
 
 const emailValidation = [validator, 'Please enter a valid email.'];
