@@ -24,13 +24,17 @@ module.exports = (req, res, next) => {
      * Sends the name & password to check if they are the same
      */
     User.auth(credentials.name, credentials.pass, (error, user) => {
-      if (error) {
+      if (error || !user) {
         console.error(error);
         return next(error);
+      } else if (!user) {
+        const error = new Error('User Not Found');
+        error.status = 403;
+        return next(error);
+      } else {
+        req.currentAuthUser = user;
+        return next();
       }
-
-      req.currentAuthUser = user;
-      return next();
     });
   }
 };

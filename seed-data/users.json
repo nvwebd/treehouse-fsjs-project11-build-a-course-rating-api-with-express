@@ -5,7 +5,7 @@
     },
     "fullName": "Joe Smith",
     "emailAddress": "joe@smith.com",
-    "password": "password",
+    "password": "$2b$10$QjRZFHUO9K4PVO.3293Ay.L.i.BWIN4UIKJoHnR.IppeuFVlE17xy",
     "__v": 0
   },
   {
@@ -14,7 +14,7 @@
     },
     "fullName": "Sam Jones",
     "emailAddress": "sam@jones.com",
-    "password": "password",
+    "password": "$2b$10$QjRZFHUO9K4PVO.3293Ay.L.i.BWIN4UIKJoHnR.IppeuFVlE17xy",
     "__v": 0
   },
   {
@@ -23,7 +23,7 @@
     },
     "fullName": "Sam Smith",
     "emailAddress": "sam@smith.com",
-    "password": "password",
+    "password": "$2b$10$QjRZFHUO9K4PVO.3293Ay.L.i.BWIN4UIKJoHnR.IppeuFVlE17xy",
     "__v": 0
   }
 ]
