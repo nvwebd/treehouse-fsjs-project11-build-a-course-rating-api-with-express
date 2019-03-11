@@ -20,7 +20,7 @@ const UserSchema = new Schema({
   emailAddress: {
     type: String,
     required: [true, 'User email is required.'],
-    unique: true,
+    unique: [true, 'Email already exists!'],
     lowercase: true,
     validate: emailValidation,
   },

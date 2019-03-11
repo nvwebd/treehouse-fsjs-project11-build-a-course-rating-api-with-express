@@ -5,5 +5,7 @@
  */
 module.exports = error => ({
   ...error,
-  status: error.name === 'ValidationError' ? 400 : 500,
+  message: error.errmsg ? error.errmsg : error.message,
+  status:
+    error.name === 'ValidationError' || error.name === 'MongoError' ? 400 : 500,
 });

@@ -6,8 +6,6 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const auth = require('basic-auth');
-const User = require('./db/models/User');
 
 /**
  * Mongo connection string and a port - change these if your mongo runs somewhere else than the standard localhost
